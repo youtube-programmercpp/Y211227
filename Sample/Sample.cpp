@@ -74,10 +74,7 @@ int main()
 {
 	std::ifstream file("^N225.csv");
 	if (file) {
-		std::string s;
-		if (std::getline(file, s)) {
-			for (Record d; file >> d >> '\n';)
-				std::cout << d << '\n';
-		}
+		for (Record d; file >> d >> '\n';)
+			std::cout << d << '\n';
 	}
 }
