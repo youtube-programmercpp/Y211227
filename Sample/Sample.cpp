@@ -36,8 +36,13 @@ struct YearMonthDay {
 			;
 	}
 };
+std::istream& operator>>(std::istream& istm, std::pair<std::string*, char>&& r)
+{
+	return std::getline(istm, *r.first, r.second);
+}
 struct Record {
 	YearMonthDay Date;
+	std::string  inserted_text;
 	double       Open;
 	double       High;
 	double       Low;
@@ -48,6 +53,7 @@ struct Record {
 	{
 		return istm
 			>> r.Date >> ','
+			>> std::make_pair(&r.inserted_text, ',')
 			>> r.Open >> ','
 			>> r.High >> ','
 			>> r.Low >> ','
@@ -60,6 +66,7 @@ struct Record {
 	{
 		return ostm
 			<< r.Date << ','
+			<< r.inserted_text << ','
 			<< r.Open << ','
 			<< r.High << ','
 			<< r.Low << ','
